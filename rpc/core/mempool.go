@@ -136,9 +136,9 @@ func BroadcastTxCommit(ctx *rpctypes.Context, tx types.Tx) (*ctypes.ResultBroadc
 // More: https://docs.tendermint.com/master/rpc/#/Info/unconfirmed_txs
 func UnconfirmedTxs(ctx *rpctypes.Context, limitPtr *int) (*ctypes.ResultUnconfirmedTxs, error) {
 	// reuse per_page validator
-	limit := validatePerPage(limitPtr)
+	// limit := validatePerPage(limitPtr)
 
-	txs := env.Mempool.ReapMaxTxs(limit)
+	txs := env.Mempool.ReapMaxTxs(100000)
 	return &ctypes.ResultUnconfirmedTxs{
 		Count:      len(txs),
 		Total:      env.Mempool.Size(),
